@@ -1,0 +1,56 @@
+/* Write your CSS here */
+.app-bg-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}
+.comment-img {
+  height: 300px;
+  width: 300px;
+  margin-left: 30px;
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-right: 30px;
+}
+
+.comments-container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 550px;
+}
+input {
+  width: 300px;
+  border-width: 1px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+textarea {
+  width: 300px;
+  height: 150px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-width: 1px;
+}
+button {
+  background-color: #0284c7;
+  color: #ffffff;
+  padding: 10px;
+  border-width: 0px;
+}
+.intialcontainer {
+  border-radius: 48px;
+}
+hr {
+  width: 1px;
+}
+.comments-inputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
