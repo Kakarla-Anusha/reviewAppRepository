@@ -17,18 +17,18 @@ const initialContainerBackgroundClassNames = [
 ]
 
 class Comments extends Component {
-  state = {username: '', comment: '', commentList: []}
+  state = {nameInput: '', commentInput: '', commentsList: []}
 
   deleteComment = commentId => {
-    const {commentList} = this.state
+    const {commentsList} = this.state
     this.setState({
-      commentList: commentList.filter(comment => comment.id !== commentId),
+      commentsList: commentsList.filter(comment => comment.id !== commentId),
     })
   }
 
-  toggleIsliked = id => {
+  toggleIsLiked = id => {
     this.setState(prevState => ({
-      commentList: prevState.commentList.map(eachComment => {
+      commentsList: prevState.commentsList.map(eachComment => {
         if (id === eachComment.id) {
           return {...eachComment, isLiked: !eachComment.isLiked}
         }
@@ -37,30 +37,23 @@ class Comments extends Component {
     }))
   }
 
-  renderCommentList = () => {
-    const {commentList} = this.state
-    return commentList.map(eachComment => (
+  renderCommentsList = () => {
+    const {commentsList} = this.state
+    return commentsList.map(eachComment => (
       <CommentItem
         key={eachComment.id}
-        toggleIsliked={this.toggleIsliked}
         commentDetails={eachComment}
+        toggleIsLiked={this.toggleIsLiked}
         deleteComment={this.deleteComment}
       />
     ))
   }
 
-  nameInputChange = event => {
-    this.setState({username: event.target.value})
-  }
-
-  commentInputChange = event => {
-    this.setState({username: event.target.value})
-  }
-
-  submitInfo = event => {
+  onAddComment = event => {
     event.preventDefault()
-    const {username, comment} = this.state
-    const intialBackgroundClassName = `intial-container ${
+
+    const {nameInput, commentInput} = this.state
+    const intialBackgroundColorClassName = `initial-container ${
       initialContainerBackgroundClassNames[
         Math.ceil(
           Math.random() * initialContainerBackgroundClassNames.length - 1,
@@ -70,48 +63,73 @@ class Comments extends Component {
 
     const newComment = {
       id: v4(),
-      username,
-      comment,
+      name: nameInput,
+      comment: commentInput,
+      date: new Date(),
       isLiked: false,
-      time: new Date(),
-      intialClassName: intialBackgroundClassName,
+      initialClassName: intialBackgroundColorClassName,
     }
-    this.setState(prevState => ({commentList: [...prevState, newComment]}))
+    this.setState(prevState => ({
+      commentsList: [...prevState.commentsList, newComment],
+      nameInput: '',
+      commentInput: '',
+    }))
+  }
+
+  onChangeCommentInput = event => {
+    this.setState({
+      commentInput: event.target.value,
+    })
+  }
+
+  onChangeNameInput = event => {
+    this.setState({
+      nameInput: event.target.vaue,
+    })
   }
 
   render() {
-    const {username, comment, commentList} = this.state
+    const {nameInput, commentInput, commentsList} = this.state
+
     return (
-      <div className="app-bg-container">
-        <div className="comments-container">
-          <h1>Comments</h1>
+      <div className="app-container">
+        <div className="comment-container">
+          <h1 className="app-heading">Comments</h1>
           <div className="comments-inputs">
-            <form className="form-container" onClick="submitInfo">
-              <p>say about 4.0 Technologies</p>
+            <form className="form" onSubmit={this.onAddComment}>
+              <p className="form-description">
+                Say something about 4.0 Technologies
+              </p>
               <input
                 type="text"
-                placeholder="Name"
-                onChange={this.nameInputChange}
+                className="name-input"
+                placeholder="Your Name"
+                value={nameInput}
+                onChange={this.onChangeNameInput}
               />
               <textarea
-                rows="6"
                 placeholder="Your Comment"
-                onChange={this.commentInputChange}
+                className="comment-input"
+                value={commentInput}
+                onChange={this.onChangeCommentInput}
+                rows="6"
               />
-              <button type="submit">Add Comment</button>
+              <button type="submit" className="add-button">
+                Add Comment
+              </button>
             </form>
-
             <img
+              className="image"
               src="https://assets.ccbp.in/frontend/react-js/comments-app/comments-img.png"
-              className="comment-img"
+              alt="comments"
             />
           </div>
-
-          <hr />
-          <p>
-            <span>{commentList.length}</span> Comments
+          <hr className="line" />
+          <p className="heading">
+            <span className="comments-count">{commentsList.length} </span>
+            Comments
           </p>
-          <ul className="commnets-list">{this.renderCommentList()}</ul>
+          <ul className="comments-list">{this.renderCommentsList}</ul>
         </div>
       </div>
     )

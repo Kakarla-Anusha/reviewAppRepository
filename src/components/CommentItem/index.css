@@ -25,6 +25,13 @@
 .light-blue {
   background-color: #0ea5e9;
 }
+.comment-item {
+  list-style-type: none;
+}
+.comment-container {
+  display: flex;
+  flex-direction: column;
+}
 .intial-container {
   display: flex;
   justify-content: center;
@@ -32,12 +39,9 @@
   width: 32px;
   height: 32px;
   border-radius: 16px;
-  flex-shrink: 0;
   margin-top: 18px;
   margin-right: 8px;
-}
-.comment-conatainer {
-  display: flex;
+  flex-shrink: 0;
 }
 .intial {
   color: #ffffff;
@@ -51,14 +55,41 @@
   margin-top: 20px;
   margin-bottom: 12px;
 }
+.username {
+  color: #0ea5e9;
+  font-family: roboto;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.time {
+  color: #0ea5e9;
+  font-family: roboto;
+  font-size: 12px;
+  margin-left: 18px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.comment {
+  color: #334155;
+  font-family: roboto;
+  font-size: 14px;
+}
 .buttons-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.like-container {
-  display: flex;
-  align-items: center;
+.button {
+  background-color: transparent;
+  color: #7e858e;
+  font-family: roboto;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 .like-image {
   height: 20px;
@@ -66,14 +97,13 @@
   margin-right: 8px;
 }
 .active {
-  color: #0284c7;
+  color: #0ea5e9;
 }
 .delete {
   height: 20px;
   width: 20px;
-  margin-right: 8px;
 }
-.comment-like {
+.comment-line {
   width: 100%;
   border: 1px solid #dee0e3;
 }

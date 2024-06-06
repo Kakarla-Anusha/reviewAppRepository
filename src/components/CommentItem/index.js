@@ -5,17 +5,17 @@ import './index.css'
 
 const CommentItem = props => {
   const {commentDetails} = props
-  const {id, username, comment, time, isLiked, intialClassName} = commentDetails
-  const likeImgUrl = isLiked
+  const {id, name, comment, isLiked, intialClassName, date} = commentDetails
+  const initial = name.slice(0, 1).toUpperCase()
+  const likeTextClassName = isLiked ? 'button active' : 'button'
+  const likeImageUrl = isLiked
     ? 'https://assets.ccbp.in/frontend/react-js/comments-app/liked-img.png'
     : 'https://assets.ccbp.in/frontend/react-js/comments-app/like-img.png'
-  const intialLetter = username ? username[0].toUpperCase() : ''
-  const likedTextClassName = isLiked ? 'button active' : 'button'
+  const postedTime = formatDistanceToNow(date)
 
-  const postedTime = formatDistanceToNow(time)
   const onClickLike = () => {
-    const {toggleIsliked} = props
-    toggleIsliked(id)
+    const {toggleIsLiked} = props
+    toggleIsLiked(id)
   }
 
   const onDeleteComment = () => {
@@ -24,27 +24,28 @@ const CommentItem = props => {
   }
 
   return (
-    <li>
-      <div className="comment-conatainer">
+    <li className="comment-item">
+      <div className="comment-container">
         <div className={intialClassName}>
-          <p className="intial">{intialLetter}</p>
+          <p className="initial">{initial}</p>
         </div>
         <div>
           <div className="username-time-container">
-            <p className="username">{username}</p>
-            <p className="time">{postedTime}ago</p>
+            <p className="username">{name}</p>
+            <p className="time">{postedTime} ago </p>
           </div>
           <p className="comment">{comment}</p>
         </div>
       </div>
       <div className="buttons-container">
         <div className="like-container">
-          <img src={likeImgUrl} alt="like" className="like-image" />
+          <img src={likeImageUrl} alt="like" className="like-image" />
           <button
-            className={likedTextClassName}
+            className={likeTextClassName}
             type="button"
             onClick={onClickLike}
           >
+            {' '}
             Like
           </button>
         </div>
